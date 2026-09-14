@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MailBox - Programming Class Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-button" id="menuButton" aria-label="Menu">
+          <span>☰</span>
+        </button>
+        <div class="brand">
+          <div class="brand-icon">M</div>
+          <span>MailBox</span>
+        </div>
+      </div>
+
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input id="searchInput" type="text" placeholder="Search mail" />
+        <button class="filter-button" aria-label="Search options">☷</button>
+      </div>
+
+      <div class="topbar-right">
+        <button class="icon-button" title="Help">?</button>
+        <button class="icon-button" title="Settings">⚙</button>
+        <button class="icon-button" title="Apps">⋮⋮</button>
+        <div class="avatar">N</div>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <aside class="sidebar" id="sidebar">
+        <button class="compose-button" id="composeButton">
+          <span class="compose-plus">✎</span>
+          <span class="compose-label">Compose</span>
+        </button>
+
+        <nav class="nav-list">
+          <button class="nav-item active" data-folder="Inbox">
+            <span class="nav-icon">▣</span>
+            <span class="nav-text">Inbox</span>
+            <span class="nav-count" id="inboxCount">5</span>
+          </button>
+          <button class="nav-item" data-folder="Starred">
+            <span class="nav-icon">★</span>
+            <span class="nav-text">Starred</span>
+          </button>
+          <button class="nav-item" data-folder="Snoozed">
+            <span class="nav-icon">◷</span>
+            <span class="nav-text">Snoozed</span>
+          </button>
+          <button class="nav-item" data-folder="Sent">
+            <span class="nav-icon">➤</span>
+            <span class="nav-text">Sent</span>
+          </button>
+          <button class="nav-item" data-folder="Drafts">
+            <span class="nav-icon">▤</span>
+            <span class="nav-text">Drafts</span>
+            <span class="nav-count">2</span>
+          </button>
+          <button class="nav-item">
+            <span class="nav-icon">⌄</span>
+            <span class="nav-text">More</span>
+          </button>
+        </nav>
+
+        <div class="labels-title">
+          <span>Labels</span>
+          <button>＋</button>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item">
+            <span class="nav-icon">▰</span>
+            <span class="nav-text">Programming</span>
+          </button>
+          <button class="nav-item">
+            <span class="nav-icon">▰</span>
+            <span class="nav-text">University</span>
+          </button>
+        </nav>
+      </aside>
+
+      <main class="mail-panel">
+        <section id="inboxView">
+          <div class="toolbar">
+            <div class="toolbar-left">
+              <input type="checkbox" id="selectAll" />
+              <button class="small-icon">⌄</button>
+              <button class="small-icon" id="refreshButton">↻</button>
+              <button class="small-icon">⋮</button>
+            </div>
+            <div class="toolbar-right">
+              <span id="rangeText">1–5 of 5</span>
+              <button class="small-icon">‹</button>
+              <button class="small-icon">›</button>
+            </div>
+          </div>
+
+          <div class="category-tabs">
+            <button class="category active">
+              <span>▣</span>
+              <div>
+                <strong>Primary</strong>
+                <small>Personal and class emails</small>
+              </div>
+            </button>
+            <button class="category">
+              <span>▦</span>
+              <div>
+                <strong>Promotions</strong>
+                <small>Offers and updates</small>
+              </div>
+            </button>
+            <button class="category">
+              <span>☷</span>
+              <div>
+                <strong>Social</strong>
+                <small>Social networks</small>
+              </div>
+            </button>
+          </div>
+
+          <div id="emailList" class="email-list"></div>
+        </section>
+
+        <section id="messageView" class="message-view hidden">
+          <div class="toolbar">
+            <div class="toolbar-left">
+              <button class="small-icon" id="backButton">←</button>
+              <button class="small-icon">▣</button>
+              <button class="small-icon">!</button>
+              <button class="small-icon">⌫</button>
+              <span class="toolbar-separator"></span>
+              <button class="small-icon">◷</button>
+              <button class="small-icon">✓</button>
+              <button class="small-icon">⇢</button>
+              <button class="small-icon">⋮</button>
+            </div>
+          </div>
+
+          <article class="message-card">
+            <div class="message-header-row">
+              <h1 id="messageSubject">Subject</h1>
+              <div>
+                <button class="small-icon">▣</button>
+                <button class="small-icon">↗</button>
+              </div>
+            </div>
+
+            <div class="sender-row">
+              <div class="avatar sender-avatar" id="senderAvatar">A</div>
+              <div class="sender-info">
+                <div>
+                  <strong id="messageSender">Sender</strong>
+                  <span class="sender-email" id="messageEmail">&lt;sender@example.com&gt;</span>
+                </div>
+                <small>to me ⌄</small>
+              </div>
+              <div class="message-meta">
+                <span id="messageDate">Today</span>
+                <button class="small-icon star-button" id="messageStar">☆</button>
+                <button class="small-icon">↩</button>
+                <button class="small-icon">⋮</button>
+              </div>
+            </div>
+
+            <div id="messageBody" class="message-body"></div>
+
+            <div class="message-actions">
+              <button>↩ Reply</button>
+              <button>⇢ Forward</button>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <aside class="rightbar">
+        <div class="right-icon calendar">31</div>
+        <div class="right-icon">☑</div>
+        <div class="right-icon">💡</div>
+        <div class="right-icon">👤</div>
+        <div class="right-line"></div>
+        <div class="right-icon">＋</div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="compose-window hidden" id="composeWindow">
+    <div class="compose-header">
+      <span>New Message</span>
+      <div>
+        <button id="minimizeCompose">—</button>
+        <button id="closeCompose">×</button>
+      </div>
+    </div>
+    <div class="compose-field">
+      <span>To</span>
+      <input id="composeTo" type="email" />
+      <span class="ccbcc">Cc Bcc</span>
+    </div>
+    <div class="compose-field">
+      <input id="composeSubject" type="text" placeholder="Subject" />
+    </div>
+    <textarea id="composeBody"></textarea>
+    <div class="compose-footer">
+      <button class="send-button" id="sendButton">Send</button>
+      <button class="send-dropdown">⌄</button>
+      <div class="compose-tools">
+        <span>A</span>
+        <span>📎</span>
+        <span>🔗</span>
+        <span>😊</span>
+        <span>▣</span>
+        <span>⋮</span>
+      </div>
+      <button class="trash-button" id="discardButton">⌫</button>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast">Message sent</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
